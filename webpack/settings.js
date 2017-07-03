@@ -1,4 +1,5 @@
-var path = require('path');
+const path = require('path');
+const chalk = require('chalk');
 
 exports.getSettings = function (env) {
 
@@ -65,20 +66,17 @@ exports.getSettings = function (env) {
 
 
     }else{
-
+        var msg;
         if (!env){
-
-            console.error('--参数 env 不能为空--');
+            msg = 'setting.js error : In the script node of package.json, the parameter "env" can\'t be empty';
 
         }else{
+            msg = 'setting.js error : In the script node of package.json,"env" Must be one of "build", "dev", or "dist"';
 
-            console.error('--没有指定的 env 标识--');
         }
-
+        console.log(chalk.red(msg));
         return false;
     }
 
-
     return settings;
-
 }
