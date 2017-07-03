@@ -75,7 +75,8 @@ module.exports = function (env) {
             use: SETTINGS.isDebug ?
                 ['style-loader', 'css-loader'] :
                 ExtractTextPlugin.extract({
-                    use: SETTINGS.isMinimize ? 'css-loader?minimize' : 'css-loader'
+                    use: SETTINGS.isMinimize ? 'css-loader?minimize' : 'css-loader',
+                    publicPath:'../'
                 })
         },
 
