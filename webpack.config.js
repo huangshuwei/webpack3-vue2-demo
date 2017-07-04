@@ -4,6 +4,10 @@ var webpack = require("webpack");
 // 将 manifest 提取到一个单独的 JSON 文件（类似的插件有 webpack-manifest-plugin、chunk-manifest-webpack-plugin、assets-webpack-plugin）
 var ManifestPlugin = require('webpack-manifest-plugin');
 
+// 基于 'chunk-manifest-webpack-plugin' 的插件，解决 manifest.js 版本号不变化 导致 long-term caching 的问题
+var InlineChunkManifestHtmlWebpackPlugin = require('inline-chunk-manifest-html-webpack-plugin');
+
+
 // 根据文件内容生成hash值（同类的插件还有webpack-md5-hash）
 var WebpackChunkHash = require("webpack-chunk-hash");
 
@@ -183,6 +187,9 @@ module.exports = function (env) {
 
             // 根据依赖自动排序
             chunksSortMode: 'dependency'
+        }),
+        new InlineChunkManifestHtmlWebpackPlugin({
+            dropAsset: true, // 不产生文件
         })
 
     ];
